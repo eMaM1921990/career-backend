@@ -150,7 +150,7 @@
 
                 <span class="span12">
 
-
+                    
 
                     <div class="box">
                         <div class="box-title">
@@ -159,62 +159,55 @@
                                 المخططات
                             </h3>
                         </div>  
+                        <div id="response"></div>
+                        <div class="box-content" id="form">
+                            <form  class="form-horizontal" >
+                                <div class="control-group">
+                                    <label for="textfield" class="control-label">اختر الإدارة</label>
+                                    <div class="controls">
+                                        <select name="s2" id="dept_id" class="select2-me input-xlarge select2-offscreen" data-placeholder="اختر اﻻدارة" tabindex="-1">
+                                            <option value=""></option>
+                                            <c:forEach items="${dept}" var="d">
+                                                <option value="<c:out  value="${d.id}"/>"><c:out  value="${d.NAME}"/></option>
+                                            </c:forEach>
+
+
+                                        </select>
+                                        <span class="help-block" style="color: red" id="dept_id-display"></span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="textfield" class="control-label">اسم المخطط</label>
+                                    <div class="controls">
+                                        <input type="text" name="name" id="name" class="input-large">
+                                        <span class="help-block" style="color: red" id="name-display"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="textfield" class="control-label">الوصــف</label>
+                                    <div class="controls">
+                                        <textarea rows="3" id="description"></textarea>
+                                        <span class="help-block" style="color: red" id="description-display"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-primary" onclick="addWorkflow()">حفظ</button>
+                                    <button type="reset" class="btn">إلغــاء</button>
+                                </div>
+                            </form>
+                        </div>
 
                     </div>
-                    <div id="response"></div>
+
+
 
 
                 </span>
 
-                <div class="row-fluid">
 
-
-                    <div class="span12">
-                        <div class="box">
-
-                            <div class="box-content ">
-                                <table class="table table-hover table-nomargin table-colored-header">
-                                    <thead>
-                                        <tr>
-                                            <th>المخطط</th>
-                                            <th class="hidden-350">الإدارة</th>
-                                            <th class="hidden-350">تاريخ الإنشاء</th>
-                                            <th class="hidden-350">الحالة </th>
-                                            <th class="hidden-350">التحكم</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${Department_wf}" var="l">
-                                            <tr>
-                                                <td><c:out value="${l.name}"/><p style="color: #808080"><c:out value="${l.description}"/></p></td>
-                                                <td><c:out value="${l.department}"/></td>
-                                                <td><c:out value="${l.created_at}"/></td>
-                                                <c:if test="${l.is_active==0}"> 
-                                                    <td style="color: red">غير نشط</td>
-                                                </c:if>
-                                                <c:if test="${l.is_active==1}"> 
-                                                    <td style="color: green">نشط</td>
-                                                </c:if>
-                                                <td>
-                                                    <a href="AddApproval?dept_id=<c:out value="${l.dept_id}"/>&id=<c:out value="${l.id}"/>" onclick="" title="أنشاء خريطة التدفق [WorkFlow]"><i class="icon-sitemap" style="color: #003bb3"></i></a> &nbsp;&nbsp;
-                                                    <a href=""  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
-
-
-                                                </td>
-
-                                            </tr>
-
-                                        </c:forEach>
-
-                                    </tbody>
-                                </table>
-                                <a class="btn btn-orange" href="Addworklfow"><i class="icon-plus-sign"></i>إضـــافة</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
             </div>
         </div>
     </body>

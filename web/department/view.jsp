@@ -188,7 +188,7 @@
                                             
                                            
                                             <td class="hidden-350">
-                                                <a href="#" onclick="DeleteDepartment('<c:out value="${l.id}"/>')" title="أنشاء خريطة التدفق [WorkFlow]"><i class="icon-sitemap" style="color: #003bb3"></i></a> &nbsp;&nbsp;
+                                                <a href="Workflows"  title="أنشاء خريطة التدفق [WorkFlow]"><i class="icon-sitemap" style="color: #003bb3"></i></a> &nbsp;&nbsp;
                                                 <a href="EditDepartment?id=<c:out value="${l.id}"/>&name=<c:out value="${l.NAME}"/>"  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
                                                 <a href="#" onclick="DeleteDepartment('<c:out value="${l.id}"/>')" title="حذف"><i class="icon-remove" style="color: red"></i></a> </td>
                                             

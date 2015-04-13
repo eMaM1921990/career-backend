@@ -18,7 +18,7 @@
         <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
         <title>Career | Admin Panel</title>
-
+        
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -156,7 +156,7 @@
                         <div class="box-title">
                             <h3>
                                 <i class="icon-magic"></i>
-                                المخططات
+                                الموظفين
                             </h3>
                         </div>  
 
@@ -176,43 +176,36 @@
                                 <table class="table table-hover table-nomargin table-colored-header">
                                     <thead>
                                         <tr>
-                                            <th>المخطط</th>
-                                            <th class="hidden-350">الإدارة</th>
-                                            <th class="hidden-350">تاريخ الإنشاء</th>
-                                            <th class="hidden-350">الحالة </th>
-                                            <th class="hidden-350">التحكم</th>
+                                            <th>الموظف </th>
+                                            <th>اﻵدارة</th>
+                                            <th>المدير المباشر</th>
+                                            <th>البريد الإلكترونى</th>
+                                            <th class="hidden-350">تحكم</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${Department_wf}" var="l">
-                                            <tr>
-                                                <td><c:out value="${l.name}"/><p style="color: #808080"><c:out value="${l.description}"/></p></td>
-                                                <td><c:out value="${l.department}"/></td>
-                                                <td><c:out value="${l.created_at}"/></td>
-                                                <c:if test="${l.is_active==0}"> 
-                                                    <td style="color: red">غير نشط</td>
-                                                </c:if>
-                                                <c:if test="${l.is_active==1}"> 
-                                                    <td style="color: green">نشط</td>
-                                                </c:if>
-                                                <td>
-                                                    <a href="AddApproval?dept_id=<c:out value="${l.dept_id}"/>&id=<c:out value="${l.id}"/>" onclick="" title="أنشاء خريطة التدفق [WorkFlow]"><i class="icon-sitemap" style="color: #003bb3"></i></a> &nbsp;&nbsp;
-                                                    <a href=""  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
-
-
-                                                </td>
-
-                                            </tr>
-
-                                        </c:forEach>
-
+                                        <c:forEach items="${emp_data}" var="e">
+                                        <tr>
+                                            <td><c:out value="${e.f_name}"/>&nbsp;<c:out value="${e.l_name}"/></td>
+                                            <td><c:out value="${e.department}"/></td>
+                                            <td style="color: red"><c:out value="${e.manager_f_name}"/>&nbsp;<c:out value="${e.manager_l_name}"/></td>
+                                           <td><c:out value="${e.email}"/></td>
+                                            <td class="hidden-350">
+                                                <a href="#"  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
+                                                <a href="#"  title="حذف"><i class="icon-remove" style="color: red"></i></a> </td>
+                                            
+                                        </tr>
+                                        
+                                     </c:forEach>
+                                        
                                     </tbody>
                                 </table>
-                                <a class="btn btn-orange" href="Addworklfow"><i class="icon-plus-sign"></i>إضـــافة</a>
+                                <a class="btn btn-orange" href="AddDepartment"><i class="icon-plus-sign"></i>إضـــافة</a>
                             </div>
                         </div>
-
-
+                        
+                         
                     </div>
                 </div>
             </div>

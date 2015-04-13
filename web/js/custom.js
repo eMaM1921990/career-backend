@@ -108,15 +108,39 @@ function addWorkflow() {
         $('#description-display').html('ادخل الوصف');
     } else {
         $.post('workflow?action=a', {name: name, description: description, dept_id: dept_id}, function(responsetext) {
-            
-            if (responsetext.indexOf("[")>0) {
+
+            if (responsetext.indexOf("[") > 0) {
                 var msg = '<div class=\"alert alert-danger\">' + responsetext + '</div>';
                 $('#response').html(msg);
             } else {
-                
+
                 var msg = '<div class=\"alert alert-success\">تم اضافة المخطط بنجاح</div>';
                 $('#response').html(msg);
             }
+        });
+    }
+}
+
+
+function addApproval() {
+    var approval_one = $('#approval_one').val();
+    var approval_two = $('#approval_two').val();
+    var step_one = $('#step_one').val();
+    var step_two = $('#step_two').val();
+    var workflow_id = $('#workflow_id').val();
+    if (parseInt(approval_one.length) === 0) {
+        $('#approval_one-display').html('اختر المصدق للموافقة المبدئية ');
+    } else if (parseInt(approval_two.length) === 0) {
+        $('#approval_two-display').html('اختر المصدق للموافقة النهائية ');
+    } else {
+        $.post('approval?action=a', {approval_one: approval_one, approval_two: approval_two, step_one: step_one, step_two: step_two, workflow_id: workflow_id}, function(responsetext) {
+            if(responsetext.indexOf('[')>0){
+               var msg = '<div class=\"alert alert-danger\">'+responsetext+'</div>'; 
+            }else{
+               var msg = '<div class=\"alert alert-success\">'+responsetext+'</div>'; 
+            }
+            
+            $('#response').html(msg);
         });
     }
 }

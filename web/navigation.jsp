@@ -31,6 +31,10 @@
                     <li>
                         <a href="Departments">إعداد الادارات</a>
                     </li>
+                    
+                    <li>
+                        <a href="Employee">إعداد الموظفين</a>
+                    </li>
                     <li>
                         <a href="Workflows">إعداد المخططات</a>
                     </li>

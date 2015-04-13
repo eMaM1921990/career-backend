@@ -13,7 +13,7 @@ public class SqlCommon {
 
     public String UPDATE_WORKFLOW_APPROVAL = "UPDATE employment.workflow_approval SET approval_id=?, step=?, workflow_id=? WHERE id=?;";
 
-    public String DELETE_WORKFLOW_APPROVAL = "DELETE FROM employment.workflow_approval WHERE id=?;";
+    public String DELETE_WORKFLOW_APPROVAL = "DELETE FROM employment.workflow_approval WHERE workflow_id=?;";
 
     public String LOGIN = "SELECT u_name, password, first_login, user_type, emp_id\n"
             + "  FROM employment.employee_user  WHERE u_name=? AND password=?;";
@@ -47,4 +47,13 @@ public class SqlCommon {
     public String INSERT_WORKFLOW = "INSERT INTO employment.workflow(\n"
             + "             name, description, dept_id, created_by)\n"
             + "    VALUES (?, ?, ?, ?);";
+
+    public String GET_DEPT_EMP = "SELECT id, f_name, l_name, dept_id, his_manager, email\n"
+            + "  FROM employment.employee WHERE dept_id=?;";
+
+    public String GET_STEP_APPROVAL = "SELECT approval_id FROM employment.workflow_approval WHERE workflow_id=? AND step=?";
+
+    public String GET_ALL_EMP = "SELECT e.id, e.f_name, e.l_name, e.dept_id, e.his_manager, e.email,D.\"NAME\",emp.f_name,emp.l_name\n"
+            + "FROM employment.employee e INNER JOIN employment.\"Department\" D ON D.id=e.dept_id INNER JOIN employment.employee emp\n"
+            + "ON emp.id=e.id;";
 }

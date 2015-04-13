@@ -7,6 +7,8 @@ import java.util.List;
 import com.career.model.workflow_approval;
 import com.career.utils.DBConnection;
 import com.career.utils.SqlCommon;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class workflow_approval_dao implements dao<workflow_approval> {
 	
@@ -18,6 +20,7 @@ public class workflow_approval_dao implements dao<workflow_approval> {
 	SqlCommon sql=new SqlCommon();
 	
 
+        @Override
 	public String Presist(workflow_approval o) {
 		// TODO Auto-generated method stub
 		String msg=null;
@@ -40,11 +43,13 @@ public class workflow_approval_dao implements dao<workflow_approval> {
 		return msg;
 	}
 
+        @Override
 	public workflow_approval Find(String phone) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+        @Override
 	public String remove(int id) {
 		// TODO Auto-generated method stub
 		String msg=null;
@@ -58,19 +63,20 @@ public class workflow_approval_dao implements dao<workflow_approval> {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			msg="["+e.getErrorCode()+"]"+e.getMessage();
 		}
 		
 		return msg;
 	}
 
+        @Override
 	public List<workflow_approval> FindAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	
+        @Override
 	public List<workflow_approval> FindByParentId(int parentID) {
 		// TODO Auto-generated method stub
 		List<workflow_approval> data=new ArrayList<>();
@@ -93,19 +99,20 @@ public class workflow_approval_dao implements dao<workflow_approval> {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			db.closeConnection();
-			e.printStackTrace();
 		}
 		
 		return data;
 	}
 
 	
+        @Override
 	public List<workflow_approval> FindBy(workflow_approval o) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	
+        @Override
 	public String update(workflow_approval o) {
 		// TODO Auto-generated method stub 
 		String msg=null;
@@ -120,14 +127,32 @@ public class workflow_approval_dao implements dao<workflow_approval> {
 			db.closeConnection();
 			msg=update_msg;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			msg="["+e.getErrorCode()+"]"+e.getMessage();
 			db.closeConnection();
 		}
 		
 		return msg;
 	}
+        
+        public int getStepApproval(int id,int step){
+            int approval_id=0;
+            try {
+                db.connect();
+                db.pstm=db.con.prepareStatement(sql.GET_STEP_APPROVAL);
+                db.pstm.setInt(1, id);
+                db.pstm.setInt(2, 0);
+                db.rs=db.pstm.executeQuery();
+                while(db.rs.next()){
+                    approval_id=db.rs.getInt(1);
+                }
+                db.closeConnection();
+            } catch (SQLException ex) {
+                db.closeConnection();
+                Logger.getLogger(workflow_approval_dao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return approval_id;
+        }
 
 	
 	

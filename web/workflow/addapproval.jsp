@@ -176,39 +176,76 @@
                                 <table class="table table-hover table-nomargin table-colored-header">
                                     <thead>
                                         <tr>
-                                            <th>المخطط</th>
-                                            <th class="hidden-350">الإدارة</th>
-                                            <th class="hidden-350">تاريخ الإنشاء</th>
-                                            <th class="hidden-350">الحالة </th>
-                                            <th class="hidden-350">التحكم</th>
+                                            <th>المصـــــدق</th>
+                                            <th class="hidden-350" colspan="2">الموافقة</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${Department_wf}" var="l">
-                                            <tr>
-                                                <td><c:out value="${l.name}"/><p style="color: #808080"><c:out value="${l.description}"/></p></td>
-                                                <td><c:out value="${l.department}"/></td>
-                                                <td><c:out value="${l.created_at}"/></td>
-                                                <c:if test="${l.is_active==0}"> 
-                                                    <td style="color: red">غير نشط</td>
-                                                </c:if>
-                                                <c:if test="${l.is_active==1}"> 
-                                                    <td style="color: green">نشط</td>
-                                                </c:if>
-                                                <td>
-                                                    <a href="AddApproval?dept_id=<c:out value="${l.dept_id}"/>&id=<c:out value="${l.id}"/>" onclick="" title="أنشاء خريطة التدفق [WorkFlow]"><i class="icon-sitemap" style="color: #003bb3"></i></a> &nbsp;&nbsp;
-                                                    <a href=""  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
+                                        <tr>
+
+                                            <td><div class="controls">
+                                                    <select name="s2" id="approval_one" class="select2-me input-xlarge select2-offscreen" data-placeholder="اختر المصدق للموافقة المبدئية" tabindex="-1">
+                                                        <option value=""></option>
+                                                        <c:forEach items="${emp_data}" var="e">
+                                                            <c:choose>
+                                                                <c:when test="${e.id==approvalone}">
+                                                                    <option value="<c:out  value="${e.id}"/>" selected="selected"><c:out  value="${e.f_name}"/><c:out  value="${e.l_name}"/></option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="<c:out  value="${e.id}"/>"><c:out  value="${e.f_name}"/><c:out  value="${e.l_name}"/></option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
 
 
-                                                </td>
+                                                    </select>
+                                                    <span class="help-block" style="color: red" id="approval_one-display"></span>
+                                                </div></td>
+                                            <td><div class="controls">
+                                                    <select name="s2" id="step_one" class="select2-me input-xlarge select2-offscreen" data-placeholder="نوع الموافقة" tabindex="-1">
 
-                                            </tr>
+                                                        <option value="0">موافقة مبدئية</option>
+                                                    </select>
+                                                    <span class="help-block" style="color: red" id="dept_id-display"></span>
+                                                </div></td>
+                                            <td><img src="img/1.png"  style="width: 50px;float: left;" /></td>
+                                        </tr>
+                                        <tr>
 
-                                        </c:forEach>
+                                            <td><div class="controls">
+                                                    <select name="s2" id="approval_two" class="select2-me input-xlarge select2-offscreen" data-placeholder="اختر المصدق للموافقة المبدئية" tabindex="-1">
+                                                        <option value=""></option>
+                                                        <c:forEach items="${emp_data}" var="e">
+                                                            <c:choose>
+                                                                <c:when test="${e.id==approvaltwo}">
+                                                                    <option value="<c:out  value="${e.id}"/>" selected="selected"><c:out  value="${e.f_name}"/><c:out  value="${e.l_name}"/></option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="<c:out  value="${e.id}"/>"><c:out  value="${e.f_name}"/><c:out  value="${e.l_name}"/></option>
+                                                                </c:otherwise>
+                                                            </c:choose>
 
+                                                        </c:forEach>
+
+
+                                                    </select>
+                                                    <span class="help-block" style="color: red" id="approval_two-display"></span>
+                                                </div></td>
+                                            <td><div class="controls">
+                                                    <select name="s2" id="step_two" class="select2-me input-xlarge select2-offscreen" data-placeholder="نوع الموافقة" tabindex="-1">
+                                                        <option value="1">موافقة نهائية</option>
+                                                    </select>
+                                                    <span class="help-block" style="color: red" id="dept_id-display"></span>
+                                                </div></td>
+                                            <td><img src="img/2.png"  style="width: 50px;float: left;" /></td>
+                                        </tr>
+                                    <input type="hidden" id="workflow_id" value="${workflow_id}"/>
                                     </tbody>
                                 </table>
-                                <a class="btn btn-orange" href="Addworklfow"><i class="icon-plus-sign"></i>إضـــافة</a>
+                                <button type="button" class="btn btn-orange" onclick="addApproval()">حفظ</button>
+
                             </div>
                         </div>
 
