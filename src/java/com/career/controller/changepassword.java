@@ -71,7 +71,11 @@ public class changepassword extends HttpServlet {
         employee_user u = (employee_user) session.getAttribute("login");
         u.setPassword(m.getMD5Password(request.getParameter("pass")));
         employee_user_dao  dao=new employee_user_dao();
-        String msg=dao.Changepasswordfirstlogin(u);
+        String msg=dao.updateFirstLogin(u.getU_name());
+        if(!msg.contains("[")){
+             msg=dao.Changepasswordfirstlogin(u);
+        }
+        
         
         response.getWriter().write(msg);
 

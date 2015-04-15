@@ -6,10 +6,14 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean  class="com.career.model.employee_user" scope="session" id="login"/>
 <%
     int timeout = session.getMaxInactiveInterval();
     response.setHeader("Refresh", timeout + "; URL = Login");
 %>
+<c:if test="${login.first_login==1}">
+    <jsp:forward page="ChangePassword" />
+</c:if>
 <!DOCTYPE html>
 <div id="navigation">
     <div class="container-fluid">
@@ -76,7 +80,7 @@
         <div class="user">
 
             <div class="dropdown">
-                <a href="#" class='dropdown-toggle' data-toggle="dropdown"> <img src="img/demo/user-avatar.jpg" alt=""></a>
+                <a href="#" class='dropdown-toggle' data-toggle="dropdown"> <jsp:getProperty name="login" property="u_name"/><img src="img/demo/user-avatar.jpg" alt=""></a>
                 <ul class="dropdown-menu pull-right">
 
                     <li>

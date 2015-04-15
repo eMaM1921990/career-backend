@@ -196,7 +196,7 @@ function addEmployee() {
 
     } else {
         $.post('employees?action=a', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email}, function(responseText) {
-            if (responseText.indexOf('[') > 0) {
+            if (responseText.indexOf('[') >= 0) {
                 var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
             } else {
                 var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
@@ -210,7 +210,7 @@ function addEmployee() {
 
 function DeleteEmp(id) {
     $.post('employees?action=d', {id: id}, function(responseText) {
-        if (responseText.indexOf('[') > 0) {
+        if (responseText.indexOf('[') >= 0) {
             var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
         } else {
             var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
@@ -257,7 +257,7 @@ function EditEmp() {
         $('#email-display').html('البريد الالكترونى غير صحيح');
     } else {
         $.post('employees?action=e', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email, id: id}, function(responseText) {
-            if (responseText.indexOf('[') > 0) {
+            if (responseText.indexOf('[') >= 0) {
                 var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
             } else {
                 var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
@@ -276,7 +276,7 @@ function ChangePasswordFirstLogin() {
     } else {
         
         $.post('changepassword',{pass:password}, function(responseText) {
-            if (responseText.indexOf('[') > 0) {
+            if (responseText.indexOf('[')>= 0) {
                 var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
                 $('#response').html(msg);
             } else {
@@ -284,7 +284,7 @@ function ChangePasswordFirstLogin() {
                 $('#response').html(msg);
                 $('#test').hide();
                 setTimeout(function() {
-                    window.location.href = "/Dashboard";
+                    window.location.href = "Dashboard";
                 }, 2000);
             }
 

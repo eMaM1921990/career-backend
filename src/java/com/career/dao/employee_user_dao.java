@@ -83,18 +83,23 @@ public class employee_user_dao implements dao<employee_user> {
 		return emp;
 	}
 	
-	public void updateFirstLogin(String u_name){
+	public String updateFirstLogin(String u_name){
+            String msg=null;
 		db.connect();
 		try {
 			db.pstm=db.con.prepareStatement(sql.FIRST_LOGIN);
-			db.pstm.setString(1, u_name);
+                        db.pstm.setInt(1, 0);
+			db.pstm.setString(2, u_name);
 			db.pstm.executeUpdate();
 			db.closeConnection();
+                        msg="تم تحديث البيانات";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			msg="["+e.getErrorCode()+"]"+e.getMessage();
 			db.closeConnection();
 		}
+                
+                return msg;
 		
 	}
         
