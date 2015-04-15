@@ -67,4 +67,8 @@ public class SqlCommon {
     public String UPDATE_EMP = "UPDATE employment.employee\n"
             + "   SET  f_name=?, l_name=?, dept_id=?, his_manager=?, email=?\n"
             + " WHERE id=?";
+
+    public String UPDATE_PASSWORD = "UPDATE employment.employee_user\n"
+            + "   SET  password=?\n"
+            + " WHERE u_name=?";
 }

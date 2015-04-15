@@ -169,14 +169,17 @@ function addEmployee() {
     if (parseInt(f_name.trim().length) === 0) {
         $('#f_name-display').html('ادخل الاسم الاول');
     } else if (parseInt(l_name.trim().length) === 0) {
-        
+
         $('#l_name-display').html('ادخل الاسم الاخير');
         $('#f_name-display').hide();
     } else if (parseInt(dept_id.trim().length) === 0) {
         $('#dept_id-display').html('اختر الادارة');
         $('#f_name-display').hide();
         $('#l_name-display').hide();
-    } else if (parseInt(his_manager.trim().length) === 0) {
+
+    }
+
+    else if (parseInt(his_manager.trim().length) === 0) {
         $('#his_manager-display').html('اختر المدير المباشر');
         $('#f_name-display').hide();
         $('#l_name-display').hide();
@@ -186,8 +189,12 @@ function addEmployee() {
         $('#f_name-display').hide();
         $('#l_name-display').hide();
         $('#dept_id-display').hide();
-        
-    }else{
+
+    } else if (parseInt(email.indexOf('@')) < 0) {
+        $('#email-display').html('البريد الالكترونى غير صحيح');
+
+
+    } else {
         $.post('employees?action=a', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email}, function(responseText) {
             if (responseText.indexOf('[') > 0) {
                 var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
@@ -201,39 +208,42 @@ function addEmployee() {
 }
 
 
-function DeleteEmp(id){
-    $.post('employees?action=d',{id:id},function (responseText){
-         if (responseText.indexOf('[') > 0) {
-                var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
-            } else {
-                var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
-            }
+function DeleteEmp(id) {
+    $.post('employees?action=d', {id: id}, function(responseText) {
+        if (responseText.indexOf('[') > 0) {
+            var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
+        } else {
+            var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
+        }
 
-            $('#response').html(msg);
-            location.reload();
+        $('#response').html(msg);
+        location.reload();
     });
 }
 
 
-function EditEmp(){
-     var f_name = $('#f_name').val();
+function EditEmp() {
+    var f_name = $('#f_name').val();
     var l_name = $('#l_name').val();
     var dept_id = $('#dept_id').val();
     var his_manager = $('#his_manager').val();
     var email = $('#email').val();
-    var id=$('#id').val();
+    var id = $('#id').val();
 
     if (parseInt(f_name.trim().length) === 0) {
         $('#f_name-display').html('ادخل الاسم الاول');
     } else if (parseInt(l_name.trim().length) === 0) {
-        
+
         $('#l_name-display').html('ادخل الاسم الاخير');
         $('#f_name-display').hide();
     } else if (parseInt(dept_id.trim().length) === 0) {
         $('#dept_id-display').html('اختر الادارة');
         $('#f_name-display').hide();
         $('#l_name-display').hide();
-    } else if (parseInt(his_manager.trim().length) === 0) {
+    }
+
+
+    else if (parseInt(his_manager.trim().length) === 0) {
         $('#his_manager-display').html('اختر المدير المباشر');
         $('#f_name-display').hide();
         $('#l_name-display').hide();
@@ -243,10 +253,10 @@ function EditEmp(){
         $('#f_name-display').hide();
         $('#l_name-display').hide();
         $('#dept_id-display').hide();
-    } else if (email.indexOf('@') < 0) {
+    } else if (parseInt(email.indexOf('@')) < 0) {
         $('#email-display').html('البريد الالكترونى غير صحيح');
     } else {
-        $.post('employees?action=e', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email,id:id}, function(responseText) {
+        $.post('employees?action=e', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email, id: id}, function(responseText) {
             if (responseText.indexOf('[') > 0) {
                 var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
             } else {
@@ -254,6 +264,31 @@ function EditEmp(){
             }
 
             $('#response').html(msg);
+        });
+    }
+}
+
+
+function ChangePasswordFirstLogin() {
+    var password = $('#password').val();
+    if (parseInt(password.trim().length) === 0) {
+        $('#password-display').html('ادخل كلمة المرور الجديدة');
+    } else {
+        
+        $.post('changepassword',{pass:password}, function(responseText) {
+            if (responseText.indexOf('[') > 0) {
+                var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
+                $('#response').html(msg);
+            } else {
+                var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
+                $('#response').html(msg);
+                $('#test').hide();
+                setTimeout(function() {
+                    window.location.href = "/Dashboard";
+                }, 2000);
+            }
+
+
         });
     }
 }
