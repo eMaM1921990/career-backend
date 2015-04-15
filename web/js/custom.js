@@ -134,12 +134,125 @@ function addApproval() {
         $('#approval_two-display').html('اختر المصدق للموافقة النهائية ');
     } else {
         $.post('approval?action=a', {approval_one: approval_one, approval_two: approval_two, step_one: step_one, step_two: step_two, workflow_id: workflow_id}, function(responsetext) {
-            if(responsetext.indexOf('[')>0){
-               var msg = '<div class=\"alert alert-danger\">'+responsetext+'</div>'; 
-            }else{
-               var msg = '<div class=\"alert alert-success\">'+responsetext+'</div>'; 
+            if (responsetext.indexOf('[') > 0) {
+                var msg = '<div class=\"alert alert-danger\">' + responsetext + '</div>';
+            } else {
+                var msg = '<div class=\"alert alert-success\">' + responsetext + '</div>';
             }
-            
+
+            $('#response').html(msg);
+        });
+    }
+}
+
+
+function getDepartmentEmp() {
+    var dept_id = $('#dept_id').val();
+    if (parseInt(dept_id.trim().length) !== 0) {
+        $.post('getDepartmentEmp', {dept_id: dept_id}, function(responseText) {
+
+            $('#his_manager').empty();
+            //$('#his_manager').append(responseText);
+
+        });
+    }
+}
+
+
+function addEmployee() {
+    var f_name = $('#f_name').val();
+    var l_name = $('#l_name').val();
+    var dept_id = $('#dept_id').val();
+    var his_manager = $('#his_manager').val();
+    var email = $('#email').val();
+
+    if (parseInt(f_name.trim().length) === 0) {
+        $('#f_name-display').html('ادخل الاسم الاول');
+    } else if (parseInt(l_name.trim().length) === 0) {
+        
+        $('#l_name-display').html('ادخل الاسم الاخير');
+        $('#f_name-display').hide();
+    } else if (parseInt(dept_id.trim().length) === 0) {
+        $('#dept_id-display').html('اختر الادارة');
+        $('#f_name-display').hide();
+        $('#l_name-display').hide();
+    } else if (parseInt(his_manager.trim().length) === 0) {
+        $('#his_manager-display').html('اختر المدير المباشر');
+        $('#f_name-display').hide();
+        $('#l_name-display').hide();
+        $('#dept_id-display').hide();
+    } else if (parseInt(email.trim().length) === 0) {
+        $('#email-display').html('ادخل البريد الالكترونى');
+        $('#f_name-display').hide();
+        $('#l_name-display').hide();
+        $('#dept_id-display').hide();
+        
+    }else{
+        $.post('employees?action=a', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email}, function(responseText) {
+            if (responseText.indexOf('[') > 0) {
+                var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
+            } else {
+                var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
+            }
+
+            $('#response').html(msg);
+        });
+    }
+}
+
+
+function DeleteEmp(id){
+    $.post('employees?action=d',{id:id},function (responseText){
+         if (responseText.indexOf('[') > 0) {
+                var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
+            } else {
+                var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
+            }
+
+            $('#response').html(msg);
+            location.reload();
+    });
+}
+
+
+function EditEmp(){
+     var f_name = $('#f_name').val();
+    var l_name = $('#l_name').val();
+    var dept_id = $('#dept_id').val();
+    var his_manager = $('#his_manager').val();
+    var email = $('#email').val();
+    var id=$('#id').val();
+
+    if (parseInt(f_name.trim().length) === 0) {
+        $('#f_name-display').html('ادخل الاسم الاول');
+    } else if (parseInt(l_name.trim().length) === 0) {
+        
+        $('#l_name-display').html('ادخل الاسم الاخير');
+        $('#f_name-display').hide();
+    } else if (parseInt(dept_id.trim().length) === 0) {
+        $('#dept_id-display').html('اختر الادارة');
+        $('#f_name-display').hide();
+        $('#l_name-display').hide();
+    } else if (parseInt(his_manager.trim().length) === 0) {
+        $('#his_manager-display').html('اختر المدير المباشر');
+        $('#f_name-display').hide();
+        $('#l_name-display').hide();
+        $('#dept_id-display').hide();
+    } else if (parseInt(email.trim().length) === 0) {
+        $('#email-display').html('ادخل البريد الالكترونى');
+        $('#f_name-display').hide();
+        $('#l_name-display').hide();
+        $('#dept_id-display').hide();
+    } else if (email.indexOf('@') < 0) {
+        $('#email-display').html('البريد الالكترونى غير صحيح');
+    } else {
+        $.post('employees?action=e', {f_name: f_name, l_name: l_name, dept_id: dept_id, his_manager: his_manager, email: email,id:id}, function(responseText) {
+            if (responseText.indexOf('[') > 0) {
+                var msg = '<div class=\"alert alert-danger\">' + responseText + '</div>';
+            } else {
+                var msg = '<div class=\"alert alert-success\">' + responseText + '</div>';
+            }
+
             $('#response').html(msg);
         });
     }

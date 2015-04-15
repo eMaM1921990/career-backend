@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.career.controller;
 
-import com.career.dao.employee_dao;
-import com.career.model.employee;
+package com.career.views;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author emam
  */
-public class getDepartmentEmp extends HttpServlet {
+public class EditEmployee extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,8 +32,16 @@ public class getDepartmentEmp extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
+       request.setCharacterEncoding("UTF-8");
+       response.setCharacterEncoding("UTF-8");
+       request.setAttribute("id", request.getParameter("id"));
+       request.setAttribute("f_name", request.getParameter("f_name"));
+       request.setAttribute("l_name", request.getParameter("l_name"));
+       request.setAttribute("dept_id", request.getParameter("dept_id"));
+       request.setAttribute("his_manager", request.getParameter("his_manager"));
+       request.setAttribute("email", request.getParameter("email"));
+        RequestDispatcher send=request.getRequestDispatcher("/emp/edit.jsp");
+        send.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,18 +71,6 @@ public class getDepartmentEmp extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        employee_dao empdao = new employee_dao();
-        List<employee> empdata = empdao.FindByParentId(Integer.valueOf(request.getParameter("dept_id")));
-        String buffer = null;
-        for (employee e : empdata) {
-            if (buffer == null) {
-                buffer = "<option value=" + e.getId() + ">" + e.getF_name() + " " + e.getL_name() + "</option>";
-            } else {
-                buffer = buffer + "<option value=" + e.getId() + ">" + e.getF_name() + " " + e.getL_name() + "</option>";
-            }
-        }
-
-        response.getWriter().write(buffer);
     }
 
     /**

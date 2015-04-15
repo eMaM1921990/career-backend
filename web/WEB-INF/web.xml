@@ -10,8 +10,8 @@
     </servlet>
     <servlet>
         <servlet-name>Dashboard</servlet-name>
-        <servlet-class>com.career.views.Dashboard</servlet-class>
-    </servlet>
+        <servlet-class>com.career.views.Dashboard</servlet-class>AddEmployee
+        </servlet>
     <servlet>
         <servlet-name>Departments</servlet-name>
         <servlet-class>com.career.views.Departments</servlet-class>
@@ -57,12 +57,20 @@
         <servlet-class>com.career.views.Employee</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddEmployee</servlet-name>
-        <servlet-class>com.career.views.AddEmployee</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>getDepartmentEmp</servlet-name>
         <servlet-class>com.career.controller.getDepartmentEmp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEmployees</servlet-name>
+        <servlet-class>com.career.views.AddEmployees</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>employees</servlet-name>
+        <servlet-class>com.career.controller.employees</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditEmployee</servlet-name>
+        <servlet-class>com.career.views.EditEmployee</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -121,12 +129,20 @@
         <url-pattern>/Employee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddEmployee</servlet-name>
-        <url-pattern>/AddEmployee</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>getDepartmentEmp</servlet-name>
         <url-pattern>/getDepartmentEmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEmployees</servlet-name>
+        <url-pattern>/AddEmployees</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>employees</servlet-name>
+        <url-pattern>/employees</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditEmployee</servlet-name>
+        <url-pattern>/EditEmployee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -134,12 +150,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        
-        
         <welcome-file>Login</welcome-file>
-    
-        
-        
-        &gt;
     </welcome-file-list>
 </web-app>

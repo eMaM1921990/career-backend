@@ -192,8 +192,8 @@
                                             <td style="color: red"><c:out value="${e.manager_f_name}"/>&nbsp;<c:out value="${e.manager_l_name}"/></td>
                                            <td><c:out value="${e.email}"/></td>
                                             <td class="hidden-350">
-                                                <a href="#"  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
-                                                <a href="#"  title="حذف"><i class="icon-remove" style="color: red"></i></a> </td>
+                                                <a href="EditEmployee?id=<c:out value="${e.id}"/>&f_name=<c:out value="${e.f_name}"/>&l_name=<c:out value="${e.l_name}"/>&dept_id=<c:out value="${e.department}"/>&his_manager=<c:out value="${e.his_manager}"/>&email=<c:out value="${e.email}"/>"  title="تعديل"><i class="icon-edit" style="color: green"></i></a> &nbsp;&nbsp;
+                                                <a href="#"  title="حذف" onclick="DeleteEmp(<c:out value="${e.id}"/>)"><i class="icon-remove" style="color: red"></i></a> </td>
                                             
                                         </tr>
                                         
@@ -201,7 +201,7 @@
                                         
                                     </tbody>
                                 </table>
-                                <a class="btn btn-orange" href="AddDepartment"><i class="icon-plus-sign"></i>إضـــافة</a>
+                                <a class="btn btn-orange" href="AddEmployees"><i class="icon-plus-sign"></i>إضـــافة</a>
                             </div>
                         </div>
                         

@@ -56,4 +56,15 @@ public class SqlCommon {
     public String GET_ALL_EMP = "SELECT e.id, e.f_name, e.l_name, e.dept_id, e.his_manager, e.email,D.\"NAME\",emp.f_name,emp.l_name\n"
             + "FROM employment.employee e INNER JOIN employment.\"Department\" D ON D.id=e.dept_id INNER JOIN employment.employee emp\n"
             + "ON emp.id=e.id;";
+
+    public String INSERT_EMP = "INSERT INTO employment.employee(\n"
+            + "             f_name, l_name, dept_id, his_manager, email)\n"
+            + "    VALUES (?, ?, ?, ?, ?);";
+
+    public String DELETE_EMP = "DELETE FROM employment.employee\n"
+            + " WHERE id=?";
+
+    public String UPDATE_EMP = "UPDATE employment.employee\n"
+            + "   SET  f_name=?, l_name=?, dept_id=?, his_manager=?, email=?\n"
+            + " WHERE id=?";
 }
